@@ -1,0 +1,178 @@
+/* Estilos gerais da página */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #b7b7b7b7;
+    margin: 0;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .divisoriaLogin {
+    background-color: #919191;
+    border-radius: 10px;
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    box-sizing: border-box; /* Inclui preenchimento e bordas na largura total */
+    height: 100%; 
+  }
+
+/* Estilos para a div 'divCriarConta' */
+.divIrCriarConta {
+    background: url('../../images/cedulas.jpg') center/cover; /* Imagem de fundo da div 'divCriarConta' */
+    border-radius: 10px;
+    padding: 20px;
+    color: #fff;/* Cor do texto dentro da div 'divCriarConta' */
+    width: 50%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.divIrCriarConta h1 {
+    font-size: 6vw;
+    font-weight: bold;
+}
+
+.divIrCriarConta h2 {
+    font-size: 4vw;
+    text-align: center;
+}
+
+.divIrCriarConta h3 {
+    font-size: 2.5vw;
+    text-align: center;
+}
+
+
+.title-container {
+    margin-top: 10%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-around;
+}
+
+.button-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 10%;
+}
+
+.button-container a {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-decoration: none;
+    color: #fff; /* Cor do texto do botão */
+    background-color: #548AA2; /* Cor de fundo do botão */
+    padding: 10px 20px;
+    border-radius: 5px;
+    text-align: center;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    height: 6vw;
+    width: 28vw;
+    font-size: 2.50vw;
+
+}
+
+.button-container a:hover {
+    background-color: #2f647a;
+    /* Cor de fundo do botão ao passar o mouse */
+}
+
+/* Estilos para a div 'divLogin' */
+.divLogin {
+    
+    background-color: #dbdbdb;
+    /* Cor de fundo da div 'divLogin' */
+    
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 50%;
+}
+
+.caixaLogin{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-around;
+    padding: 20px;
+    border-radius: 10px;
+    background-color: #B8C8D5;
+    width: 70%;
+    min-width: 100px;
+    height: 90%;
+    min-height: 150px;
+
+}
+.divLogin img{
+    width: 8vw;
+    height: 8vw;
+    border-radius: 30%;
+}
+
+.divLogin h1 {
+    font-size: 4vw;
+    text-align: center;
+}
+
+.divLogin p{
+    text-align: center;
+    font-size: 2.5vw;
+}
+.divLogin a{
+    color: #767676;
+    font-size: 2.5vw;
+}
+
+.divLogin Input {
+    margin: 5px 0;
+    padding: 5px;
+    border-radius: 5px;
+    height: 5.9vw;
+    border: 1px solid #ccc;
+}
+
+.divLogin Button {
+    background-color: #548AA2;
+    /* Cor de fundo do botão 'Logar' */
+    color: #fff;
+    /* Cor do texto do botão */
+    padding: 10px 20px;
+    border-radius: 5px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.divLogin Button:hover {
+    background-color: #2f647a;
+    /* Cor de fundo do botão ao passar o mouse */
+}
+@media screen and (max-width: 450px) {
+    .divisoriaLogin {
+        display: flex;
+        flex-direction: column;
+        
+    }
+    .divIrCriarConta{
+        width: 100%;
+        height: 50%;
+        padding: 0;
+        justify-content: space-around;
+    }
+    .divLogin{
+        width: 100%;
+        height: 70%;
+    }
+    .divLogin Input{
+        margin: 2.5px;
+    }
+}
