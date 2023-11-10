@@ -1,6 +1,5 @@
 import {
   IconButton,
-  Avatar,
   Box,
   CloseButton,
   Flex,
@@ -31,6 +30,7 @@ import {
   FiChevronDown,
 } from 'react-icons/fi'
 import { IconType } from 'react-icons'
+import './sideBar.css'
 
 interface LinkItemProps {
   name: string
@@ -49,13 +49,16 @@ interface MobileProps extends FlexProps {
 interface SidebarProps extends BoxProps {
   onClose: () => void
 }
+interface PageContentProps {
+  children: React.ReactNode
+}
+
 
 const LinkItems: Array<LinkItemProps> = [
-  { name: 'Home', icon: FiHome },
-  { name: 'Trending', icon: FiTrendingUp },
-  { name: 'Explore', icon: FiCompass },
-  { name: 'Favourites', icon: FiStar },
-  { name: 'Settings', icon: FiSettings },
+  { name: 'Turmas', icon: FiHome },
+  { name: 'Criar Turma', icon: FiTrendingUp },
+  { name: 'Inserir Produto', icon: FiStar },
+  { name: 'Lista de Produto', icon: FiSettings },
 ]
 
 const SidebarContent = ({ onClose, ...rest }: SidebarProps) => {
@@ -70,9 +73,12 @@ const SidebarContent = ({ onClose, ...rest }: SidebarProps) => {
       h="full"
       {...rest}>
       <Flex h="20" alignItems="center" mx="8" justifyContent="space-between">
-        <Text fontSize="2xl" fontFamily="monospace" fontWeight="bold">
-          Logo
-        </Text>
+        <img
+          src="/src/images/logo-poupancinha.jpg"
+          alt="Logo poupancinha"
+          className='logoImgSideBar'
+        />
+        <Text>Poupancinha</Text>
         <CloseButton display={{ base: 'flex', md: 'none' }} onClick={onClose} />
       </Flex>
       {LinkItems.map((link) => (
@@ -99,7 +105,7 @@ const NavItem = ({ icon, children, ...rest }: NavItemProps) => {
         role="group"
         cursor="pointer"
         _hover={{
-          bg: 'cyan.400',
+          bg: '#afd4e4',//Botão azul claro on hover
           color: 'white',
         }}
         {...rest}>
@@ -144,7 +150,7 @@ const MobileNav = ({ onOpen, ...rest }: MobileProps) => {
         fontSize="2xl"
         fontFamily="monospace"
         fontWeight="bold">
-        Logo
+        Poupancinha
       </Text>
 
       <HStack spacing={{ base: '0', md: '6' }}>
@@ -153,21 +159,25 @@ const MobileNav = ({ onOpen, ...rest }: MobileProps) => {
           <Menu>
             <MenuButton py={2} transition="all 0.3s" _focus={{ boxShadow: 'none' }}>
               <HStack>
+                {/*
                 <Avatar
                   size={'sm'}
                   src={
                     'https://images.unsplash.com/photo-1619946794135-5bc917a27793?ixlib=rb-0.3.5&q=80&fm=jpg&crop=faces&fit=crop&h=200&w=200&s=b616b2c5b373a80ffc9636ba24f7a4a9'
                   }
                 />
+                */}
                 <VStack
                   display={{ base: 'none', md: 'flex' }}
                   alignItems="flex-start"
                   spacing="1px"
                   ml="2">
-                  <Text fontSize="sm">Justina Clark</Text>
-                  <Text fontSize="xs" color="gray.600">
-                    Admin
+                  <Text fontSize="sm">
+                    {////////////////////////////////////////////
+                    }
+                    Fazer Get name
                   </Text>
+
                 </VStack>
                 <Box display={{ base: 'none', md: 'flex' }}>
                   <FiChevronDown />
@@ -177,11 +187,13 @@ const MobileNav = ({ onOpen, ...rest }: MobileProps) => {
             <MenuList
               bg={useColorModeValue('white', 'gray.900')}
               borderColor={useColorModeValue('gray.200', 'gray.700')}>
-              <MenuItem>Profile</MenuItem>
-              <MenuItem>Settings</MenuItem>
-              <MenuItem>Billing</MenuItem>
+              <MenuItem>Settings{
+                ////////////////////////////////////////////////////////////
+              }</MenuItem>
               <MenuDivider />
-              <MenuItem>Sign out</MenuItem>
+              <MenuItem>Sign out{
+                ////////////////////////////////////////////////////////////
+              }</MenuItem>
             </MenuList>
           </Menu>
         </Flex>
@@ -190,8 +202,9 @@ const MobileNav = ({ onOpen, ...rest }: MobileProps) => {
   )
 }
 
-const SidebarWithHeader = () => {
+const SidebarWithHeader = (props: PageContentProps) => {
   const { isOpen, onOpen, onClose } = useDisclosure()
+  const { children } = props// adciona o encaminhamento para outra div como children
 
   return (
     <Box minH="100vh" bg={useColorModeValue('gray.100', 'gray.900')}>
@@ -210,7 +223,7 @@ const SidebarWithHeader = () => {
       {/* mobilenav */}
       <MobileNav onOpen={onOpen} />
       <Box ml={{ base: 0, md: 60 }} p="4">
-        {/* Content */}
+        {children}
       </Box>
     </Box>
   )
