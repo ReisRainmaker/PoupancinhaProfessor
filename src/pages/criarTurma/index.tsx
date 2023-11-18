@@ -1,5 +1,7 @@
+import { Text, Box, Stack, FormControl, FormLabel, Input, Button } from '@chakra-ui/react'
 import SidebarWithHeader from "../../components/sidebar";
 import { useState } from 'react';
+import './criarTurma.css'
 
 export default function CriarTurma() {
 
@@ -24,53 +26,55 @@ export default function CriarTurma() {
 
     return (
         <SidebarWithHeader>
-            <div className="container">
-                <h1>Criar Nova Turma</h1>
+            <Box className="boxFundo">
+                <Box className='boxContainer'>
+                    <Text fontSize='4vw' color='Black'>Cadastrar nova turma</Text>
 
-                <div className="content-container">
-                    <div className="imagem-container">
-                        <img
-                            src={imagem ? URL.createObjectURL(imagem) : '../../images/cedulas.jpg'}
-                            alt="Imagem da Turma"
-                            className="imagem-turma"
-                        />
-                        <input type="file" accept="image/*" onChange={salvarImagem} className="upload-btn" />
-                    </div>
+                    <Box className="contentContainer">
+                        <Box className="imagem-container">
+                            <img
+                                src={imagem ? URL.createObjectURL(imagem) : '../../images/cedulas.jpg'}
+                                alt="Imagem da Turma"
+                                className="imagem-turma"
+                            />
+                            <Input type="file" accept="image/*" onChange={salvarImagem} className="upload-btn" />
+                        </Box>
 
-                    <div className="form-container">
-                        <div>
-                            <label>Nome da Turma:</label>
-                            <input
-                                type="text"
-                                value={nomeTurma}
-                                onChange={(e) => setNomeTurma(e.target.value)}
-                                className="input-field"
-                            />
-                        </div>
-                        <div>
-                            <label>Nome da Escola:</label>
-                            <input
-                                type="text"
-                                value={nomeEscola}
-                                onChange={(e) => setNomeEscola(e.target.value)}
-                                className="input-field"
-                            />
-                        </div>
-                        <div>
-                            <label>Série da Turma:</label>
-                            <input
-                                type="text"
-                                value={serieTurma}
-                                onChange={(e) => setSerieTurma(e.target.value)}
-                                className="input-field"
-                            />
-                        </div>
-                        <button onClick={salvarTurma} className="save-btn">
-                            Salvar
-                        </button>
-                    </div>
-                </div>
-            </div>
+                        <Stack className="form-container">
+                            <FormControl>
+                                <FormLabel>Nome da Turma:</FormLabel>
+                                <Input
+                                    type="text"
+                                    value={nomeTurma}
+                                    onChange={(e) => setNomeTurma(e.target.value)}
+                                    className="input-field-criarTurma"
+                                />
+                            </FormControl>
+                            <FormControl>
+                                <FormLabel>Nome da Escola:</FormLabel>
+                                <Input
+                                    type="text"
+                                    value={nomeEscola}
+                                    onChange={(e) => setNomeEscola(e.target.value)}
+                                    className="input-field-criarTurma"
+                                />
+                            </FormControl>
+                            <FormControl>
+                                <FormLabel>Série da Turma:</FormLabel>
+                                <Input
+                                    type="text"
+                                    value={serieTurma}
+                                    onChange={(e) => setSerieTurma(e.target.value)}
+                                    className="input-field-criarTurma"
+                                />
+                            </FormControl>
+                            <button onClick={salvarTurma} className="save-btn">
+                                Salvar
+                            </button>
+                        </Stack>
+                    </Box>
+                </Box>
+            </Box>
         </SidebarWithHeader>
     )
 }

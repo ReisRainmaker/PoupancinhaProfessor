@@ -1,73 +1,81 @@
 /* NovaTurmaPage.css */
 
-body {
-    font-family: 'Arial', sans-serif;
-    margin: 0;
-    padding: 0;
-    background-color: #f4f4f4;
-  }
-  
-  .container {
-    text-align: center;
-    margin-top: 20px;
-  }
-  
-  .content-container {
-    display: flex;
-    justify-content: center;
-    margin-top: 20px;
-  }
-  
-  .imagem-container {
-    margin-right: 20px;
-  }
-  
-  .imagem-turma {
-    width: 150px;
-    height: 150px;
-    object-fit: cover;
-    border-radius: 8px;
-  }
-  
-  .upload-btn {
-    margin-top: 10px;
-    cursor: pointer;
-    padding: 8px;
-    background-color: #3498db;
-    color: #fff;
-    border: none;
-    border-radius: 4px;
-    font-size: 14px;
-  }
-  
-  .form-container {
-    display: flex;
-    flex-direction: column;
-  }
-  
-  label {
-    margin-bottom: 5px;
-    color: #333;
-  }
-  
-  .input-field {
-    padding: 8px;
-    margin-bottom: 10px;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-  }
-  
-  .save-btn {
-    padding: 10px;
-    background-color: #27ae60;
-    color: #fff;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-    font-size: 16px;
-  }
-  
-  .save-btn:hover {
-    background-color: #218c53;
-  }
-  
+.boxFundo {
+  display: flex;
+  align-items: center;
+  justify-content:  center;
+  background: url('../../images/cedulas.jpg') center/cover;
+  padding: 10px;
+  height: 83vh;
+}
+
+.boxContainer{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background-color: #fff;
+  padding: 10px;
+  border-radius: 15px;
+}
+
+
+.contentContainer {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 5px;
+}
+
+.imagem-container {
+  margin-right: 10px;
+  width: 35%;
+}
+
+.imagem-turma {
+  align-self: center;
+  width: 100%;
+  height:auto;
+  object-fit: cover;
+  border-radius: 8px;
+}
+
+.upload-btn {
+  margin-top: 10px;
+  cursor: pointer;
+  padding: 5px;
+  background-color: #3498db;
+  color: rgb(70, 70, 70);
+  border: none;
+  border-radius: 4px;
+  font-size: 2vw;
+  width: 100%;
+}
+
+.form-container {
+  display: flex;
+  flex-direction: column;
+  width: 65%;
+}
+
+label {
+  color: #333;
+}
+
+.input-field-criarTurma {
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+.save-btn {
+  padding: 10px;
+  background-color: rgb(133, 241, 241);
+  color: rgb(70, 70, 70);
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 16px;
+}
+
+.save-btn:hover {
+  background-color: rgb(150, 213, 230);
+}

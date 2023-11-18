@@ -18,8 +18,8 @@ import {
   MenuDivider,
   MenuItem,
   MenuList,
-} from '@chakra-ui/react'
-import {
+ } from '@chakra-ui/react'
+ import {
   FiHome,
   FiTrendingUp,
   FiCompass,
@@ -28,40 +28,50 @@ import {
   FiMenu,
   FiBell,
   FiChevronDown,
-} from 'react-icons/fi'
-import { IconType } from 'react-icons'
-import './sideBar.css'
-
-interface LinkItemProps {
+ } from 'react-icons/fi'
+ import { IconType } from 'react-icons'
+ import './sideBar.css'
+ import { Link } from 'react-router-dom'
+ 
+ 
+ interface LinkItemProps {
   name: string
   icon: IconType
-}
-
-interface NavItemProps extends FlexProps {
+  href: string
+ }
+ 
+ 
+ interface NavItemProps extends FlexProps {
   icon: IconType
   children: React.ReactNode
-}
-
-interface MobileProps extends FlexProps {
+  href: string
+ }
+ 
+ 
+ interface MobileProps extends FlexProps {
   onOpen: () => void
-}
-
-interface SidebarProps extends BoxProps {
+ }
+ 
+ 
+ interface SidebarProps extends BoxProps {
   onClose: () => void
-}
-interface PageContentProps {
+ }
+ interface PageContentProps {
   children: React.ReactNode
-}
-
-
-const LinkItems: Array<LinkItemProps> = [
-  { name: 'Turmas', icon: FiHome },
-  { name: 'Criar Turma', icon: FiTrendingUp },
-  { name: 'Inserir Produto', icon: FiStar },
-  { name: 'Lista de Produto', icon: FiSettings },
-]
-
-const SidebarContent = ({ onClose, ...rest }: SidebarProps) => {
+ }
+ 
+ 
+ 
+ 
+ const LinkItems: Array<LinkItemProps> = [
+  { name: 'Home', icon: FiHome, href: '/home' },
+  { name: 'Criar Turma', icon: FiTrendingUp, href: '/criarTurma' },
+  { name: 'Inserir Produto', icon: FiStar, href: '/inserirProduto' },
+  { name: 'Lista de Produto', icon: FiSettings, href: '/listarProduto' },
+ ]
+ 
+ 
+ const SidebarContent = ({ onClose, ...rest }: SidebarProps) => {
   return (
     <Box
       transition="3s ease"
@@ -82,21 +92,18 @@ const SidebarContent = ({ onClose, ...rest }: SidebarProps) => {
         <CloseButton display={{ base: 'flex', md: 'none' }} onClick={onClose} />
       </Flex>
       {LinkItems.map((link) => (
-        <NavItem key={link.name} icon={link.icon}>
+        <NavItem key={link.name} icon={link.icon} href={link.href}>
           {link.name}
         </NavItem>
       ))}
     </Box>
   )
-}
-
-const NavItem = ({ icon, children, ...rest }: NavItemProps) => {
+ }
+ 
+ 
+ const NavItem = ({ icon, children, href, ...rest }: NavItemProps) => {
   return (
-    <Box
-      as="a"
-      href="#"
-      style={{ textDecoration: 'none' }}
-      _focus={{ boxShadow: 'none' }}>
+    <Link to={href} key={href}>
       <Flex
         align="center"
         p="4"
@@ -121,11 +128,12 @@ const NavItem = ({ icon, children, ...rest }: NavItemProps) => {
         )}
         {children}
       </Flex>
-    </Box>
+    </Link>
   )
-}
-
-const MobileNav = ({ onOpen, ...rest }: MobileProps) => {
+ }
+ 
+ 
+ const MobileNav = ({ onOpen, ...rest }: MobileProps) => {
   return (
     <Flex
       ml={{ base: 0, md: 60 }}
@@ -144,7 +152,8 @@ const MobileNav = ({ onOpen, ...rest }: MobileProps) => {
         aria-label="open menu"
         icon={<FiMenu />}
       />
-
+ 
+ 
       <Text
         display={{ base: 'flex', md: 'none' }}
         fontSize="2xl"
@@ -152,7 +161,8 @@ const MobileNav = ({ onOpen, ...rest }: MobileProps) => {
         fontWeight="bold">
         Poupancinha
       </Text>
-
+ 
+ 
       <HStack spacing={{ base: '0', md: '6' }}>
         <IconButton size="lg" variant="ghost" aria-label="open menu" icon={<FiBell />} />
         <Flex alignItems={'center'}>
@@ -177,7 +187,8 @@ const MobileNav = ({ onOpen, ...rest }: MobileProps) => {
                     }
                     Fazer Get name
                   </Text>
-
+ 
+ 
                 </VStack>
                 <Box display={{ base: 'none', md: 'flex' }}>
                   <FiChevronDown />
@@ -200,12 +211,14 @@ const MobileNav = ({ onOpen, ...rest }: MobileProps) => {
       </HStack>
     </Flex>
   )
-}
-
-const SidebarWithHeader = (props: PageContentProps) => {
+ }
+ 
+ 
+ const SidebarWithHeader = (props: PageContentProps) => {
   const { isOpen, onOpen, onClose } = useDisclosure()
   const { children } = props// adciona o encaminhamento para outra div como children
-
+ 
+ 
   return (
     <Box minH="100vh" bg={useColorModeValue('gray.100', 'gray.900')}>
       <SidebarContent onClose={() => onClose} display={{ base: 'none', md: 'block' }} />
@@ -227,6 +240,8 @@ const SidebarWithHeader = (props: PageContentProps) => {
       </Box>
     </Box>
   )
-}
-
-export default SidebarWithHeader
+ }
+ 
+ 
+ export default SidebarWithHeader
+ 

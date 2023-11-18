@@ -14,7 +14,7 @@ const router = createBrowserRouter([
     {path: '/', element: <Login/>, errorElement: <NotFound/>},
     {path: '/criarConta', element: <CriarConta/>},
     {path: '/home', element: <Home/>, errorElement: <NotFound/>},
-    {path: '/AdcinarOuSubtrair', element: <AdcSub/>},
+    {path: '/adcinarOuSubtrair', element: <AdcSub/>},
     {path: '/criarTurma', element: <CriarTurma/>},
     {path: '/inserirProduto', element: <InserirProduto/>},
     {path: '/listarProduto', element: <ListarProduto/>},
