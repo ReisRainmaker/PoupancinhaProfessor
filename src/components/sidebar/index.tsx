@@ -22,7 +22,6 @@ import {
  import {
   FiHome,
   FiTrendingUp,
-  FiCompass,
   FiStar,
   FiSettings,
   FiMenu,
@@ -67,7 +66,7 @@ import {
   { name: 'Home', icon: FiHome, href: '/home' },
   { name: 'Criar Turma', icon: FiTrendingUp, href: '/criarTurma' },
   { name: 'Inserir Produto', icon: FiStar, href: '/inserirProduto' },
-  { name: 'Lista de Produto', icon: FiSettings, href: '/listarProduto' },
+  { name: 'Lista de Produtos', icon: FiSettings, href: '/listarProduto' },
  ]
  
  
@@ -109,6 +108,7 @@ import {
         p="4"
         mx="4"
         borderRadius="lg"
+        
         role="group"
         cursor="pointer"
         _hover={{
@@ -235,7 +235,7 @@ import {
       </Drawer>
       {/* mobilenav */}
       <MobileNav onOpen={onOpen} />
-      <Box ml={{ base: 0, md: 60 }} p="4">
+      <Box ml={{ base: 0, md: 60 }}>
         {children}
       </Box>
     </Box>

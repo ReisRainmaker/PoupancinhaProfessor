@@ -3,16 +3,20 @@ import SidebarWithHeader from "../../components/sidebar";
 import { useState } from 'react';
 import './criarTurma.css'
 
+
 export default function CriarTurma() {
+
 
     const [imagem, setImagem] = useState(null);
     const [nomeTurma, setNomeTurma] = useState('');
     const [nomeEscola, setNomeEscola] = useState('');
     const [serieTurma, setSerieTurma] = useState('');
 
+
     const salvarImagem = () => {
         //Criar função para salvar imagem
     };
+
 
     const salvarTurma = () => {
         //Criar lógica para salvar os dados da turma
@@ -24,11 +28,13 @@ export default function CriarTurma() {
         });
     };
 
+
     return (
         <SidebarWithHeader>
-            <Box className="boxFundo">
+            <Box className="boxFundo" h="91.9vh">
                 <Box className='boxContainer'>
                     <Text fontSize='4vw' color='Black'>Cadastrar nova turma</Text>
+
 
                     <Box className="contentContainer">
                         <Box className="imagem-container">
@@ -39,6 +45,7 @@ export default function CriarTurma() {
                             />
                             <Input type="file" accept="image/*" onChange={salvarImagem} className="upload-btn" />
                         </Box>
+
 
                         <Stack className="form-container">
                             <FormControl>

@@ -1,13 +1,5 @@
 /* NovaTurmaPage.css */
 
-.boxFundo {
-  display: flex;
-  align-items: center;
-  justify-content:  center;
-  background: url('../../images/cedulas.jpg') center/cover;
-  padding: 10px;
-  height: 83vh;
-}
 
 .boxContainer{
   display: flex;
@@ -17,29 +9,36 @@
   background-color: #fff;
   padding: 10px;
   border-radius: 15px;
-}
-
-
-.contentContainer {
+  height: 90%;
+  width: 90%;
+ }
+ 
+ 
+ 
+ 
+ .contentContainer {
   display: flex;
   justify-content: space-between;
   margin-top: 5px;
-}
-
-.imagem-container {
+ }
+ 
+ 
+ .imagem-container {
   margin-right: 10px;
   width: 35%;
-}
-
-.imagem-turma {
+ }
+ 
+ 
+ .imagem-turma {
   align-self: center;
   width: 100%;
   height:auto;
   object-fit: cover;
   border-radius: 8px;
-}
-
-.upload-btn {
+ }
+ 
+ 
+ .upload-btn {
   margin-top: 10px;
   cursor: pointer;
   padding: 5px;
@@ -49,24 +48,28 @@
   border-radius: 4px;
   font-size: 2vw;
   width: 100%;
-}
-
-.form-container {
+ }
+ 
+ 
+ .form-container {
   display: flex;
   flex-direction: column;
   width: 65%;
-}
-
-label {
+ }
+ 
+ 
+ label {
   color: #333;
-}
-
-.input-field-criarTurma {
+ }
+ 
+ 
+ .input-field-criarTurma {
   border: 1px solid #ccc;
   border-radius: 4px;
-}
-
-.save-btn {
+ }
+ 
+ 
+ .save-btn {
   padding: 10px;
   background-color: rgb(133, 241, 241);
   color: rgb(70, 70, 70);
@@ -74,8 +77,10 @@ label {
   border-radius: 4px;
   cursor: pointer;
   font-size: 16px;
-}
-
-.save-btn:hover {
+ }
+ 
+ 
+ .save-btn:hover {
   background-color: rgb(150, 213, 230);
-}
+ }
+ 

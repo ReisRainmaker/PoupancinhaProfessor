@@ -1,4 +1,15 @@
-body, #root, .grid {
-    height: 100%;
-    width: 100%;
+body,
+#root,
+.grid {
+   height: 100%;
+   width: 100%;
+}
+
+
+.boxFundo {
+   display: flex;
+   align-items: center;
+   justify-content: center;
+   background: url('images/cedulas.jpg') center/cover;
+   opacity: 0.9;
 }

@@ -1,0 +1,43 @@
+/* ListarProdutosPage.css */
+
+
+.boxContainerProdutos {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background-color: #fff;
+    padding: 10px;
+    border-radius: 15px;
+    max-height: 90%;
+    overflow-x: auto;
+    margin: 1rem;
+   }
+   
+   
+   .css-zipzvv {
+    overflow-y: scroll !important;
+   }
+   
+   
+   .table {
+    overflow-x: auto;
+    max-width: 100%;
+   }
+   
+   
+   .table th,
+   .table td {
+    white-space: nowrap;
+   }
+   
+   
+   @media (max-width: 768px) {
+   
+   
+    .table th,
+    .table td {
+      font-size: 14px;
+    }
+   }
+   

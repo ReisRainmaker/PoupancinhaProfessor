@@ -1,0 +1,77 @@
+/* InserirProdutoPage.css */
+
+.boxContainerProduto {
+    display: flex;
+    flex-direction: column;
+    background-color: #fff;
+    padding: 10px;
+    border-radius: 15px;
+    height: 90%;
+    width: 90%;
+  }
+ 
+ 
+  .box-label {
+    padding: 1rem;
+  }
+  
+  .contentContainerProduto {
+    display: flex;
+    justify-content: space-between;
+    padding: 1rem;
+  }
+   .imagem-container {
+    margin-right: 10px;
+    width: 35%;
+  }
+   .imagem-produto {
+    align-self: center;
+    width: 100%;
+    height:auto;
+    object-fit: cover;
+    border-radius: 8px;
+  }
+ 
+ 
+  .button-produto {
+    margin-top: 1rem;
+    height: 2.9rem !important;
+ 
+ 
+  }
+   .upload-btn {
+    margin-top: 10px;
+    cursor: pointer;
+    padding: 5px;
+    background-color: #3498db;
+    color: rgb(70, 70, 70);
+    border: none;
+    border-radius: 4px;
+    font-size: 2vw;
+    width: 100%;
+  }
+   .form-container {
+    display: flex;
+    flex-direction: column;
+    width: 65%;
+  }
+   label {
+    color: #333;
+  }
+   .input-field-criarProduto {
+    border: 1px solid #ccc;
+    border-radius: 4px;
+  }
+   .save-btn {
+    padding: 10px;
+    background-color: rgb(133, 241, 241);
+    color: rgb(70, 70, 70);
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 16px;
+  }
+   .save-btn:hover {
+    background-color: rgb(150, 213, 230);
+  }
+ 
