@@ -30,7 +30,7 @@ export default function CriarConta() {
                 return;
             }
 
-            const verificacao = await axiosConfig.get(`homeAluno/user/${email}`);
+            await axiosConfig.get(`homeAluno/user/${email}`);
             setResultado('Este E-mail já foi cadastrado.');
         } catch (error) {
             try {
@@ -43,12 +43,16 @@ export default function CriarConta() {
                     turma: 'sem Turma',
                     tipoUsuario: 'Professor',
                 });
-
+                const idUser = response.data.id
+                if (idUser){
                 // Lidar com o resultado do registro, se necessário
                 console.log('Conta criada com sucesso:', response);
 
                 setResultado('Conta criada com sucesso!');
-                navigate(`/home`);
+                navigate(`/home/${idUser}`);
+                }else{
+                    console.log('erro ao registrar o id de usuário')
+                }
             } catch (e) {
                 console.error('Erro ao criar a conta:', e);
                 setResultado('Erro ao criar a conta. Verifique seus dados e tente novamente.');

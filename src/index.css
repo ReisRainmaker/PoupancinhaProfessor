@@ -6,10 +6,10 @@ body,
 }
 
 
-.boxFundo {
+.box-fundo {
    display: flex;
    align-items: center;
    justify-content: center;
    background: url('images/cedulas.jpg') center/cover;
-   opacity: 0.9;
+   /* opacity: 0.9; */
 }

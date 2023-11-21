@@ -13,13 +13,15 @@ import ResumoTurma from "../pages/resumoTurma";
 const router = createBrowserRouter([
     {path: '/', element: <Login/>, errorElement: <NotFound/>},
     {path: '/criarConta', element: <CriarConta/>},
-    {path: '/home', element: <Home/>, errorElement: <NotFound/>},
-    {path: '/adcinarOuSubtrair', element: <AdcSub/>},
-    {path: '/criarTurma', element: <CriarTurma/>},
-    {path: '/inserirProduto', element: <InserirProduto/>},
-    {path: '/listarProduto', element: <ListarProduto/>},
-    {path: '/presencas', element: <Presencas/>},
-    {path: '/resumoTurma', element: <ResumoTurma/>},
+    
+    {path: '/criarTurma/:idUser', element: <CriarTurma/>},
+    {path: '/inserirProduto/:idUser', element: <InserirProduto/>},
+    {path: '/listarProduto/:idUser', element: <ListarProduto/>},
+
+    {path: '/home/:idUser', element: <Home/>},
+    {path: '/adcinarOuSubtrair/:idUser', element: <AdcSub/>},
+    {path: '/presencas/:idUser', element: <Presencas/>},
+    {path: '/resumoTurma/:idUser', element: <ResumoTurma/>},
 
 
 ])

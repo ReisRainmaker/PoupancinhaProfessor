@@ -1,0 +1,19 @@
+.card {
+    width: 20rem;
+    height: 30.5rem;
+ }
+ 
+ 
+ .card-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 1rem;
+ }
+ 
+ 
+ .card-title {
+    margin-top: 1rem;
+ }
+ 
+ 

@@ -1,11 +1,11 @@
 /* NovaTurmaPage.css */
 
 
-.boxContainer{
+
+
+.box-container-turma {
   display: flex;
   flex-direction: column;
-  align-items: center;
-  justify-content: center;
   background-color: #fff;
   padding: 10px;
   border-radius: 15px;
@@ -14,21 +14,18 @@
  }
  
  
- 
- 
- .contentContainer {
+ .box-label-turma {
+  padding: 1rem;
+ }
+ .content-container-turma {
   display: flex;
   justify-content: space-between;
-  margin-top: 5px;
+  padding: 1rem;
  }
- 
- 
  .imagem-container {
   margin-right: 10px;
   width: 35%;
  }
- 
- 
  .imagem-turma {
   align-self: center;
   width: 100%;
@@ -38,6 +35,10 @@
  }
  
  
+ .button-turma {
+  margin-top: 1rem;
+  height: 2.9rem !important;
+ }
  .upload-btn {
   margin-top: 10px;
   cursor: pointer;
@@ -49,26 +50,18 @@
   font-size: 2vw;
   width: 100%;
  }
- 
- 
  .form-container {
   display: flex;
   flex-direction: column;
   width: 65%;
  }
- 
- 
  label {
   color: #333;
  }
- 
- 
- .input-field-criarTurma {
+ .input-field-criar-turma {
   border: 1px solid #ccc;
   border-radius: 4px;
  }
- 
- 
  .save-btn {
   padding: 10px;
   background-color: rgb(133, 241, 241);
@@ -78,8 +71,6 @@
   cursor: pointer;
   font-size: 16px;
  }
- 
- 
  .save-btn:hover {
   background-color: rgb(150, 213, 230);
  }

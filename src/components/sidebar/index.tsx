@@ -18,8 +18,8 @@ import {
   MenuDivider,
   MenuItem,
   MenuList,
- } from '@chakra-ui/react'
- import {
+} from '@chakra-ui/react'
+import {
   FiHome,
   FiTrendingUp,
   FiStar,
@@ -27,50 +27,54 @@ import {
   FiMenu,
   FiBell,
   FiChevronDown,
- } from 'react-icons/fi'
- import { IconType } from 'react-icons'
- import './sideBar.css'
- import { Link } from 'react-router-dom'
- 
- 
- interface LinkItemProps {
+} from 'react-icons/fi'
+import { IconType } from 'react-icons'
+import './sideBar.css'
+import { Link } from 'react-router-dom'
+
+
+interface LinkItemProps {
   name: string
   icon: IconType
   href: string
- }
- 
- 
- interface NavItemProps extends FlexProps {
+}
+
+
+interface NavItemProps extends FlexProps {
   icon: IconType
   children: React.ReactNode
   href: string
- }
- 
- 
- interface MobileProps extends FlexProps {
+}
+
+
+interface MobileProps extends FlexProps {
   onOpen: () => void
- }
- 
- 
- interface SidebarProps extends BoxProps {
+  nome: string
+}
+
+
+interface SidebarProps extends BoxProps {
   onClose: () => void
- }
- interface PageContentProps {
+  id: any
+}
+interface PageContentProps {
   children: React.ReactNode
- }
- 
- 
- 
- 
- const LinkItems: Array<LinkItemProps> = [
-  { name: 'Home', icon: FiHome, href: '/home' },
-  { name: 'Criar Turma', icon: FiTrendingUp, href: '/criarTurma' },
-  { name: 'Inserir Produto', icon: FiStar, href: '/inserirProduto' },
-  { name: 'Lista de Produtos', icon: FiSettings, href: '/listarProduto' },
- ]
- 
- 
- const SidebarContent = ({ onClose, ...rest }: SidebarProps) => {
+  id: any
+  nome: any
+}
+
+
+
+const LinkItems: Array<LinkItemProps> = [
+  { name: 'Home', icon: FiHome, href: '/home/' },
+  { name: 'Criar Turma', icon: FiTrendingUp, href: '/criarTurma/' },
+  { name: 'Inserir Produto', icon: FiStar, href: '/inserirProduto/' },
+  { name: 'Lista de Produtos', icon: FiSettings, href: '/listarProduto/' },
+]
+
+
+const SidebarContent = ({ onClose, ...rest }: SidebarProps, props: SidebarProps) => {
+  const {id} = props
   return (
     <Box
       transition="3s ease"
@@ -91,16 +95,16 @@ import {
         <CloseButton display={{ base: 'flex', md: 'none' }} onClick={onClose} />
       </Flex>
       {LinkItems.map((link) => (
-        <NavItem key={link.name} icon={link.icon} href={link.href}>
+        <NavItem key={link.name} icon={link.icon} href={link.href+id}>
           {link.name}
         </NavItem>
       ))}
     </Box>
   )
- }
- 
- 
- const NavItem = ({ icon, children, href, ...rest }: NavItemProps) => {
+}
+
+
+const NavItem = ({ icon, children, href, ...rest }: NavItemProps) => {
   return (
     <Link to={href} key={href}>
       <Flex
@@ -108,7 +112,7 @@ import {
         p="4"
         mx="4"
         borderRadius="lg"
-        
+
         role="group"
         cursor="pointer"
         _hover={{
@@ -130,10 +134,11 @@ import {
       </Flex>
     </Link>
   )
- }
- 
- 
- const MobileNav = ({ onOpen, ...rest }: MobileProps) => {
+}
+
+
+const MobileNav = ({ onOpen, ...rest}: MobileProps, props: MobileProps) => {
+  const { nome } = props
   return (
     <Flex
       ml={{ base: 0, md: 60 }}
@@ -152,8 +157,8 @@ import {
         aria-label="open menu"
         icon={<FiMenu />}
       />
- 
- 
+
+
       <Text
         display={{ base: 'flex', md: 'none' }}
         fontSize="2xl"
@@ -161,8 +166,8 @@ import {
         fontWeight="bold">
         Poupancinha
       </Text>
- 
- 
+
+
       <HStack spacing={{ base: '0', md: '6' }}>
         <IconButton size="lg" variant="ghost" aria-label="open menu" icon={<FiBell />} />
         <Flex alignItems={'center'}>
@@ -183,12 +188,11 @@ import {
                   spacing="1px"
                   ml="2">
                   <Text fontSize="sm">
-                    {////////////////////////////////////////////
-                    }
-                    Fazer Get name
+                    Nome do professor: {nome}
+
                   </Text>
- 
- 
+
+
                 </VStack>
                 <Box display={{ base: 'none', md: 'flex' }}>
                   <FiChevronDown />
@@ -211,17 +215,20 @@ import {
       </HStack>
     </Flex>
   )
- }
- 
- 
- const SidebarWithHeader = (props: PageContentProps) => {
+}
+
+
+const SidebarWithHeader = (props: PageContentProps) => {
   const { isOpen, onOpen, onClose } = useDisclosure()
   const { children } = props// adciona o encaminhamento para outra div como children
- 
- 
+  const { id } = props
+  const { nome } = props
+  /////////////////////// Use efect do Get Usuário /////////////////////////
+  
+
   return (
     <Box minH="100vh" bg={useColorModeValue('gray.100', 'gray.900')}>
-      <SidebarContent onClose={() => onClose} display={{ base: 'none', md: 'block' }} />
+      <SidebarContent id={id} onClose={() => onClose} display={{ base: 'none', md: 'block' }} />
       <Drawer
         isOpen={isOpen}
         placement="left"
@@ -230,18 +237,17 @@ import {
         onOverlayClick={onClose}
         size="full">
         <DrawerContent>
-          <SidebarContent onClose={onClose} />
+          <SidebarContent id={id} onClose={onClose} />
         </DrawerContent>
       </Drawer>
       {/* mobilenav */}
-      <MobileNav onOpen={onOpen} />
+      <MobileNav onOpen={onOpen} nome={nome}/>
       <Box ml={{ base: 0, md: 60 }}>
         {children}
       </Box>
     </Box>
   )
- }
- 
- 
- export default SidebarWithHeader
- 
+}
+
+
+export default SidebarWithHeader

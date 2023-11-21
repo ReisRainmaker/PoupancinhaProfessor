@@ -1,5 +1,18 @@
-.boxConteudo{
-    height: 500px;
+.box-home{
+    height: 100%;
     width: 100%;
-    background-image: url('../../images/cedulas.jpg') center/cover;
-}
+ }
+ 
+ 
+ .box-container-home {
+    display: flex;
+    flex-wrap: wrap;
+    padding: 1rem;
+    justify-content: center;
+ }
+ 
+ 
+ .card-home {
+    padding: 0.5rem;
+ }
+ 
