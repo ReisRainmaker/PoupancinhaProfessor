@@ -1,8 +1,14 @@
 import { Card, Text, Image, Stack, Button, Box } from '@chakra-ui/react'
 import './cardTurmas.css'
 
+interface cardProps {
+    turma: object
+    
+  }
+  
 
-export default function CardTurmas() {
+export default function CardTurmas( props: cardProps) {
+   const {turma} = props
    return (
        <Card className='card'>
            <Box className='card-content'>
@@ -16,7 +22,7 @@ export default function CardTurmas() {
 
                <Stack className='card-title'>
                    <Text fontSize={'3xl'} fontWeight={800}>
-                       Nome da turma
+                       {turma.nomeTurma}
                    </Text>
                </Stack>
 

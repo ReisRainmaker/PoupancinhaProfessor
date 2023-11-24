@@ -5,60 +5,89 @@ import { Box } from '@chakra-ui/react'
 import { useEffect, useState } from 'react';
 import { Button } from '@chakra-ui/react';
 import { Table, TableContainer, Tbody, Td, Th, Thead, Tr } from '@chakra-ui/table';
-import { useParams } from 'react-router-dom';
 import axiosConfig from '../../config/axios';
 
 
 export default function ListarProduto() {
-
-    const { idUser } = useParams();
-    const [userData, setUserData] = useState(null);
-    const [ProfessorData, setProfessorData] = useState(null);
-    const [turmasData, setTurmasData] = useState(null);
-    const [nomeProfessor, setNomeProfessor] = useState("");
+    const user = JSON.parse(localStorage.getItem("auth-user"));
+    const [professorData, setProfessorData] = useState(null);
     const [produtosData, setProdutosData] = useState([])
 
 
+    /////////////// Pegar as informações do professor por id do usuário ////////////
     useEffect(() => {
-        fetch('https://www.balldontlie.io/api/v1/players?page=1')
-            .then((response) => response.json())
-            .then((data) => setProdutosData(data.data));
-    }, [])
+        const getUserById = async () => {
+            if (user) {
+                await axiosConfig.get(`professor/byUser/${user.idUser}`)
+                    .then((response) => {
+                        const data = response.data;
+                        setProfessorData(data);
+                        console.log("Retorno do Professor", response.data)
+                    }).catch((error) => {
+                        console.error('Erro ao buscar informações do Professor:', error);
+                    })
+            }
+        }
+        if (!professorData) {
+            getUserById();
+
+        }
+    }, [user]);
+    //////////// pegar os produtos pelo id do professor ///////////
+    const getProdutoByProfessor = async () => {
+        try {
+            if (produtosData) {
+                const response = await axiosConfig.get(`produto/byProfessor/${professorData.idProfessor}`);
+                const data = response.data;
+                setProdutosData(data);
+                console.log("Retorno de produtos", response.data);
+            }
+        } catch (error) {
+            console.error('Erro ao buscar Produtos:', error);
+        }
+    };
+    useEffect(() => {
+        
+        if (produtosData.length === 0) {
+            getProdutoByProfessor();
+        }
+    }, [produtosData, professorData]);
 
 
-    const alterarProduto = (id: any) => {
+    const alterarProduto = (id: number) => {
         console.log('alterar produto', id);
     }
 
 
-    const excluirProduto = (id: number) => {
-        console.log('excluir produto', id);
-    }
-
-
-    useEffect(() => {
-        const getUserById = async () => {
-            if (idUser) {
-                await axiosConfig.get(`home/userId/${idUser}`)
-                    .then((response) => {
-                        const data = response.data;
-                        setUserData(data);
-                        setNomeProfessor(data.nome)
-                        console.log("Retorno do usuário", response.data)
-                    }).catch((error) => {
-                        console.error('Erro ao buscar informações do Usuário:', error);
-                    })
-            }
+    const excluirProduto = async (id: number) => {
+        const confirmacao = window.confirm("Tem certeza que deseja excluir este item?");
+      
+        if (confirmacao) {
+          try {
+            await excluirItem(id);
+            console.log("Item excluído com sucesso!");
+          } catch (error) {
+            console.error("Falha ao tentar excluir:", error.message);
+          }
         }
-        if (!userData) {
-            getUserById();
-
+      };
+      
+      const excluirItem = async (id: number) => {
+        try {
+          const response = await axiosConfig.delete(`produto/${id}`);
+          const data = response.data
+          getProdutoByProfessor();
+        } catch (error) {
+          throw new Error("Falha ao tentar excluir o item.");
         }
-    }, [idUser, userData, nomeProfessor]);
+      };
+      
+
+
 
 
     return (
-        <SidebarWithHeader id={idUser} nome={nomeProfessor}>
+        <SidebarWithHeader>
             <Box className="boxFundo" h="91.9vh">
                 <Box className='boxContainerProdutos'>
                     <TableContainer className="table">
@@ -77,11 +106,11 @@ export default function ListarProduto() {
 
                             <Tbody>
                                 {produtosData?.map((produto) => (
-                                    <Tr key={produto.id}>
-                                        <Td>{produto.first_name} {produto.last_name}</Td>
-                                        <Td>{produto.team.full_name}</Td>
-                                        <Td>{produto.first_name} {produto.last_name}</Td>
-                                        <Td>{produto.team.full_name}</Td>
+                                    <Tr key={produto.idProduto}>
+                                        <Td>{produto.nome}</Td>
+                                        <Td>{produto.preco}</Td>
+                                        <Td>{produto.quantDisponivel} </Td>
+                                        <Td>{produto.quantVendidos}</Td>
                                         <Td><Button colorScheme='teal' key={produto.id} onClick={() => alterarProduto(produto.id)}>Alterar</Button></Td>
                                         <Td><Button colorScheme='red' key={produto.id} onClick={() => excluirProduto(produto.id)}>Excluir</Button></Td>
                                     </Tr>

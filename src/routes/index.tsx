@@ -14,14 +14,14 @@ const router = createBrowserRouter([
     {path: '/', element: <Login/>, errorElement: <NotFound/>},
     {path: '/criarConta', element: <CriarConta/>},
     
-    {path: '/criarTurma/:idUser', element: <CriarTurma/>},
-    {path: '/inserirProduto/:idUser', element: <InserirProduto/>},
-    {path: '/listarProduto/:idUser', element: <ListarProduto/>},
+    {path: '/criarTurma', element: <CriarTurma/>},
+    {path: '/inserirProduto', element: <InserirProduto/>},
+    {path: '/listarProduto', element: <ListarProduto/>},
 
-    {path: '/home/:idUser', element: <Home/>},
-    {path: '/adcinarOuSubtrair/:idUser', element: <AdcSub/>},
-    {path: '/presencas/:idUser', element: <Presencas/>},
-    {path: '/resumoTurma/:idUser', element: <ResumoTurma/>},
+    {path: '/home', element: <Home/>},
+    {path: '/adcinarOuSubtrair', element: <AdcSub/>},
+    {path: '/presencas', element: <Presencas/>},
+    {path: '/resumoTurma', element: <ResumoTurma/>},
 
 
 ])

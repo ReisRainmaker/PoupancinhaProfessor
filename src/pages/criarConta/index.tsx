@@ -49,7 +49,7 @@ export default function CriarConta() {
                 console.log('Conta criada com sucesso:', response);
 
                 setResultado('Conta criada com sucesso!');
-                navigate(`/home/${idUser}`);
+                logar()
                 }else{
                     console.log('erro ao registrar o id de usuário')
                 }
@@ -60,6 +60,37 @@ export default function CriarConta() {
         }
     };
 
+    const logar = () => {
+        if (email == '' || senha == '') {
+            setResultado('Digite login e senha');
+        } else {
+
+            //Login na api
+            axiosConfig.post('/auth/login', {
+                email: email,
+                password: senha,
+            }).then((resposta) => {
+                if (resposta.data.error) {
+                    setResultado(resposta.data.error)
+                    return
+                }
+                const user = {
+                    nome: resposta.data.nome,
+                    sobrenome: resposta.data.sobrenome,
+                    email: email,
+                    idUser: resposta.data.idUser,
+                    token: resposta.data.token,
+                    expiresAt: resposta.data.expiresAt,
+                    refreshToken: resposta.data.refreshToken
+                }
+                localStorage.setItem('auth-user', JSON.stringify(user));
+                navigate(`/home`);
+            }).catch((erro) => {
+                console.log(erro)
+                setResultado('falha ao realizar o login')
+            })
+        }
+    };
 
 
 

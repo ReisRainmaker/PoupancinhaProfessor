@@ -1,7 +1,7 @@
 import { Button, Input, Text } from "@chakra-ui/react";
 import { Link, useNavigate } from "react-router-dom"
 import './login.css';
-import { useEffect, useState } from "react";
+import {  useEffect, useState } from "react";
 import axiosConfig from "../../config/axios";
 
 
@@ -28,6 +28,8 @@ export default function Login() {
                     return
                 }
                 const user = {
+                    nome: resposta.data.nome,
+                    sobrenome: resposta.data.sobrenome,
                     email: email,
                     idUser: resposta.data.idUser,
                     token: resposta.data.token,
@@ -35,7 +37,7 @@ export default function Login() {
                     refreshToken: resposta.data.refreshToken
                 }
                 localStorage.setItem('auth-user', JSON.stringify(user));
-                navigate(`/home/${resposta.data.idUser}`);
+                navigate(`/home`);
             }).catch((erro) => {
                 console.log(erro)
                 setResultado('falha ao realizar o login')

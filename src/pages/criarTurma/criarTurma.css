@@ -74,4 +74,7 @@
  .save-btn:hover {
   background-color: rgb(150, 213, 230);
  }
+ .resultado {
+  text-align: center;
+ }
  

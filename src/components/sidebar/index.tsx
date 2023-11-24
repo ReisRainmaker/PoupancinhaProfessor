@@ -49,32 +49,30 @@ interface NavItemProps extends FlexProps {
 
 interface MobileProps extends FlexProps {
   onOpen: () => void
-  nome: string
+
 }
 
 
 interface SidebarProps extends BoxProps {
   onClose: () => void
-  id: any
+
 }
 interface PageContentProps {
   children: React.ReactNode
-  id: any
-  nome: any
+
 }
-
-
+const user = JSON.parse(localStorage.getItem("auth-user"));
+console.log("teste sidebar: ",user)
 
 const LinkItems: Array<LinkItemProps> = [
-  { name: 'Home', icon: FiHome, href: '/home/' },
-  { name: 'Criar Turma', icon: FiTrendingUp, href: '/criarTurma/' },
-  { name: 'Inserir Produto', icon: FiStar, href: '/inserirProduto/' },
-  { name: 'Lista de Produtos', icon: FiSettings, href: '/listarProduto/' },
+  { name: 'Home', icon: FiHome, href: '/home' },
+  { name: 'Criar Turma', icon: FiTrendingUp, href: '/criarTurma' },
+  { name: 'Inserir Produto', icon: FiStar, href: '/inserirProduto' },
+  { name: 'Lista de Produtos', icon: FiSettings, href: '/listarProduto' },
 ]
 
 
-const SidebarContent = ({ onClose, ...rest }: SidebarProps, props: SidebarProps) => {
-  const {id} = props
+const SidebarContent = ({ onClose, ...rest }: SidebarProps,) => {
   return (
     <Box
       transition="3s ease"
@@ -95,7 +93,7 @@ const SidebarContent = ({ onClose, ...rest }: SidebarProps, props: SidebarProps)
         <CloseButton display={{ base: 'flex', md: 'none' }} onClick={onClose} />
       </Flex>
       {LinkItems.map((link) => (
-        <NavItem key={link.name} icon={link.icon} href={link.href+id}>
+        <NavItem key={link.name} icon={link.icon} href={link.href}>
           {link.name}
         </NavItem>
       ))}
@@ -137,8 +135,7 @@ const NavItem = ({ icon, children, href, ...rest }: NavItemProps) => {
 }
 
 
-const MobileNav = ({ onOpen, ...rest}: MobileProps, props: MobileProps) => {
-  const { nome } = props
+const MobileNav = ({ onOpen, ...rest}: MobileProps) => {
   return (
     <Flex
       ml={{ base: 0, md: 60 }}
@@ -188,7 +185,7 @@ const MobileNav = ({ onOpen, ...rest}: MobileProps, props: MobileProps) => {
                   spacing="1px"
                   ml="2">
                   <Text fontSize="sm">
-                    Nome do professor: {nome}
+                    {user.nome}
 
                   </Text>
 
@@ -221,14 +218,12 @@ const MobileNav = ({ onOpen, ...rest}: MobileProps, props: MobileProps) => {
 const SidebarWithHeader = (props: PageContentProps) => {
   const { isOpen, onOpen, onClose } = useDisclosure()
   const { children } = props// adciona o encaminhamento para outra div como children
-  const { id } = props
-  const { nome } = props
-  /////////////////////// Use efect do Get Usuário /////////////////////////
+
   
 
   return (
     <Box minH="100vh" bg={useColorModeValue('gray.100', 'gray.900')}>
-      <SidebarContent id={id} onClose={() => onClose} display={{ base: 'none', md: 'block' }} />
+      <SidebarContent  onClose={() => onClose} display={{ base: 'none', md: 'block' }} />
       <Drawer
         isOpen={isOpen}
         placement="left"
@@ -237,11 +232,11 @@ const SidebarWithHeader = (props: PageContentProps) => {
         onOverlayClick={onClose}
         size="full">
         <DrawerContent>
-          <SidebarContent id={id} onClose={onClose} />
+          <SidebarContent onClose={onClose} />
         </DrawerContent>
       </Drawer>
       {/* mobilenav */}
-      <MobileNav onOpen={onOpen} nome={nome}/>
+      <MobileNav onOpen={onOpen}/>
       <Box ml={{ base: 0, md: 60 }}>
         {children}
       </Box>

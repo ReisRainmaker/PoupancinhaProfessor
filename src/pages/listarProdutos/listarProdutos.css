@@ -29,6 +29,7 @@
    .table th,
    .table td {
     white-space: nowrap;
+    text-align: center;
    }
    
    
@@ -38,6 +39,7 @@
     .table th,
     .table td {
       font-size: 14px;
+      text-align: center;
     }
    }
    

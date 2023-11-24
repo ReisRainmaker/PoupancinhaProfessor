@@ -2,89 +2,74 @@ import { Text, Box, Stack, FormControl, FormLabel, Input, Button } from '@chakra
 import SidebarWithHeader from "../../components/sidebar";
 import { useEffect, useState } from 'react';
 import './criarTurma.css'
-import { useParams } from 'react-router-dom';
 import axiosConfig from '../../config/axios';
+import { useNavigate } from 'react-router-dom';
 
 
 
 
 export default function CriarTurma() {
+    const navigate = useNavigate();
+    const user = JSON.parse(localStorage.getItem("auth-user"));
+    const [professorData, setProfessorData] = useState(null);
+    const [resultado, setResultado] = useState('Preencha os campos e pressione salvar para criar uma nova turma.');
 
-    const { idUser } = useParams();
-
-
-    const [imagem, setImagem] = useState(null);
     const [nomeTurma, setNomeTurma] = useState('');
     const [nomeEscola, setNomeEscola] = useState('');
     const [serieTurma, setSerieTurma] = useState('');
+    const [imagemTurma, setImagemTurma] = useState('/src/images/logo-poupancinha.jpg');
 
-    const [userData, setUserData] = useState(null);
-    const [ProfessorData, setProfessorData] = useState(null);
-    const [turmasData, setTurmasData] = useState(null);
-    const [nomeProfessor, setNomeProfessor] = useState("");
 
+    /////////////// Pegar as informações do professor por id do usuário ////////////
     useEffect(() => {
         const getUserById = async () => {
-            if (idUser) {
-                await axiosConfig.get(`home/userId/${idUser}`)
+            if (user) {
+                await axiosConfig.get(`professor/byUser/${user.idUser}`)
                     .then((response) => {
                         const data = response.data;
-                        setUserData(data);
-                        setNomeProfessor(data.nome)
-                        console.log("Retorno do usuário", response.data)
+                        setProfessorData(data);
+                        console.log("Retorno do Professor", response.data)
                     }).catch((error) => {
-                        console.error('Erro ao buscar informações do Usuário:', error);
+                        console.error('Erro ao buscar informações do Professor:', error);
                     })
             }
         }
-        if (!userData) {
+        if (!professorData) {
             getUserById();
 
         }
-    }, [idUser, userData, nomeProfessor]);
+    }, [user]);
 
-
-
-
+    ///////////////// Salvar uma nova turma para o professor //////////////
     const salvarTurma = async () => {
-        // APAGAR COMENTÁRIOS E ALTERAR NOMES
-
-
         try {
-            // Construir o corpo da requisição
-            const corpoRequisicao = {
-                imagem,
-                nomeTurma,
-                nomeEscola,
-                serieTurma,
-            };
-
-
-            // Fazer a requisição para o endpoint
-            const resposta = await fetch('sua-url-do-endpoint', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify(corpoRequisicao),
-            });
-
-
-
-
-            // Verificar se a requisição foi bem-sucedida
-            if (resposta.ok) {
-                console.log('Turma salva com sucesso!');
-                // Lógica adicional, se necessário
-            } else {
-                console.error('Erro ao salvar turma:', resposta.status);
-                // Lógica adicional para lidar com erro
+            if (nomeTurma === '' || nomeEscola === '' || serieTurma === '' || imagemTurma === '') {
+                setResultado('Preencha todos os campos corretamente');
+                return;
             }
+            const response = await axiosConfig.post(`turma`, {
+                imagemTurma: imagemTurma,
+                nomeTurma: nomeTurma,
+                nomeEscola: nomeEscola,
+                serie: serieTurma,
+                idProfessor: professorData.idProfessor
+            });
+            const idTurma = response.data.idTurma
+            if (idTurma) {
+                // Lidar com o resultado do registro, se necessário
+                console.log('Turma criada com sucesso:', response);
+                setResultado('Turma criada com sucesso!');
+                navigate(`/home`);
+            } else {
+                console.log('Erro ao salvar a turma')
+            }
+
         } catch (erro) {
-            console.error('Erro na requisição:', erro);
-            // Lógica adicional para lidar com erro
+            console.error('Erro ao salvar turma:', erro);
+            setResultado('Houve um problema ao tentar salvar a turma, Verifique as informações e tente novamente');
         }
     };
+
 
 
     const salvarImagemTurma = () => {
@@ -93,14 +78,14 @@ export default function CriarTurma() {
 
 
     return (
-        <SidebarWithHeader id={idUser} nome={nomeProfessor}>
+        <SidebarWithHeader>
             <Box className="box-fundo" h="91.9vh">
                 <Box className='box-container-turma'>
                     <Text fontSize='5xl' color='Black' className='box-label-turma'>Cadastrar nova turma</Text>
                     <Box className="content-container-turma">
                         <Box className="imagem-container">
                             <img
-                                src={imagem ? URL.createObjectURL(imagem) : '../../images/cedulas.jpg'}
+                                src={imagemTurma}
                                 alt="Imagem da Turma"
                                 className="imagem-turma"
                             />
@@ -135,9 +120,7 @@ export default function CriarTurma() {
                                 />
                             </FormControl>
                             <Button colorScheme='teal' className='button-turma' onClick={salvarTurma}>Salvar</Button>
-                            {/* <button onClick={salvarTurma} className="save-btn">
-                               Salvar
-                           </button> */}
+                            <h2 className='resultado'>{resultado}</h2>
                         </Stack>
                     </Box>
                 </Box>
