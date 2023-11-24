@@ -8,7 +8,7 @@ import axiosConfig from "../../config/axios";
 
 export default function Login() {
     const navigate = useNavigate();
-    const [resultado, setResultado] = useState('Digite seus dados');
+    const [resultado, setResultado] = useState('');
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     
