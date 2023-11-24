@@ -9,6 +9,7 @@ import InserirProduto from "../pages/inserirProduto";
 import ListarProduto from "../pages/listarProdutos";
 import Presencas from "../pages/presencas";
 import ResumoTurma from "../pages/resumoTurma";
+import AlterarProduto from "../pages/alterarProduto";
 
 const router = createBrowserRouter([
     {path: '/', element: <Login/>, errorElement: <NotFound/>},
@@ -17,6 +18,7 @@ const router = createBrowserRouter([
     {path: '/criarTurma', element: <CriarTurma/>},
     {path: '/inserirProduto', element: <InserirProduto/>},
     {path: '/listarProduto', element: <ListarProduto/>},
+    {path: '/alterarProduto/:idProduto', element: <AlterarProduto/>},
 
     {path: '/home', element: <Home/>},
     {path: '/adcinarOuSubtrair', element: <AdcSub/>},

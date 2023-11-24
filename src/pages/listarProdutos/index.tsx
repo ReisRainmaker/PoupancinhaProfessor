@@ -6,12 +6,14 @@ import { useEffect, useState } from 'react';
 import { Button } from '@chakra-ui/react';
 import { Table, TableContainer, Tbody, Td, Th, Thead, Tr } from '@chakra-ui/table';
 import axiosConfig from '../../config/axios';
+import { useNavigate } from 'react-router-dom';
 
 
 export default function ListarProduto() {
     const user = JSON.parse(localStorage.getItem("auth-user"));
     const [professorData, setProfessorData] = useState(null);
     const [produtosData, setProdutosData] = useState([])
+    const navigate = useNavigate();
 
 
     /////////////// Pegar as informações do professor por id do usuário ////////////
@@ -47,41 +49,34 @@ export default function ListarProduto() {
         }
     };
     useEffect(() => {
-        
+
         if (produtosData.length === 0) {
             getProdutoByProfessor();
         }
     }, [produtosData, professorData]);
 
 
-    const alterarProduto = (id: number) => {
-        console.log('alterar produto', id);
-    }
-
-
     const excluirProduto = async (id: number) => {
         const confirmacao = window.confirm("Tem certeza que deseja excluir este item?");
-      
+        console.log("id: " , id)
         if (confirmacao) {
-          try {
-            await excluirItem(id);
-            console.log("Item excluído com sucesso!");
-          } catch (error) {
-            console.error("Falha ao tentar excluir:", error.message);
-          }
+            try {
+                await excluirItem(id);
+            } catch (error) {
+                console.error("Falha ao tentar excluir:", error.message);
+            }
         }
-      };
-      
-      const excluirItem = async (id: number) => {
+    };
+    const excluirItem = async (id: number) => {
         try {
-          const response = await axiosConfig.delete(`produto/${id}`);
-          const data = response.data
-          getProdutoByProfessor();
+            const response = await axiosConfig.delete(`produto/${id}`);
+            console.log('Produto excluido com sucesso', response)
+            getProdutoByProfessor();
         } catch (error) {
-          throw new Error("Falha ao tentar excluir o item.");
+            console.log("Falha ao tentar excluir o item.", error);
         }
-      };
-      
+    };
+
 
 
 
@@ -111,8 +106,8 @@ export default function ListarProduto() {
                                         <Td>{produto.preco}</Td>
                                         <Td>{produto.quantDisponivel} </Td>
                                         <Td>{produto.quantVendidos}</Td>
-                                        <Td><Button colorScheme='teal' key={produto.id} onClick={() => alterarProduto(produto.id)}>Alterar</Button></Td>
-                                        <Td><Button colorScheme='red' key={produto.id} onClick={() => excluirProduto(produto.id)}>Excluir</Button></Td>
+                                        <Td><Button colorScheme='teal' key={produto.id} onClick={() => navigate(`/alterarProduto/${produto.idProduto}`)}>Alterar</Button></Td>
+                                        <Td><Button colorScheme='red' key={produto.id} onClick={() => excluirProduto(produto.idProduto)}>Excluir</Button></Td>
                                     </Tr>
                                 ))}
                             </Tbody>
